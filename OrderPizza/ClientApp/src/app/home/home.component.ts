@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { AppService } from '../app.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   modalRef: BsModalRef;
-  constructor(public modalService: BsModalService, private http: HttpClient) { }
+  constructor(public modalService: BsModalService, private http: HttpClient, private appService: AppService) { }
 
   public basePizza: any;
   public sizes: any;
@@ -17,7 +18,6 @@ export class HomeComponent implements OnInit {
   public sauces: any;
   public toppings: any;
   public pizzaBeingCustomized: any = {};
-  public orderBeingCustomized: any = {};
   public sizePrice: number = 0;
   public crustPrice: number = 0;
   public extraCheese: boolean = false;
@@ -28,8 +28,6 @@ export class HomeComponent implements OnInit {
     this.getPizzaCrusts();
     this.getPizzaSauces();
     this.getPizzaToppings();
-    this.orderBeingCustomized.pizzas = [];
-    this.orderBeingCustomized.bill = 0;
   }
 
   //Get all base pizzas
@@ -175,25 +173,38 @@ export class HomeComponent implements OnInit {
   //Open customize pizza modal
   public openModal(template: TemplateRef<any>, selectedPizza: any) {
     let self = this;
-    self.pizzaBeingCustomized.basePizza = selectedPizza;
-    self.pizzaBeingCustomized.price = selectedPizza.basePrice;
-    self.pizzaBeingCustomized.size = "Small";
-    self.pizzaBeingCustomized.toppings = [];
-    self.pizzaBeingCustomized.sauce = "";
-    self.pizzaBeingCustomized.crust = "Hand Tossed";
-    self.pizzaBeingCustomized.extraCheese = self.extraCheese;
+    self.createDefaultSelectedPizza(selectedPizza);
     self.modalRef = this.modalService.show(template);
   }
 
   public AddToCart() {
     let self = this;
-    self.orderBeingCustomized.bill = 0;
-    self.orderBeingCustomized.pizzas.push(self.pizzaBeingCustomized);
-    self.orderBeingCustomized.pizzas.forEach(element => self.orderBeingCustomized.bill = self.orderBeingCustomized.bill + element.price);
+    self.appService.emitOrder(self.pizzaBeingCustomized);
+    self.clearSelectedPizza()
+    self.modalService.hide();
+  }
+  public AddDefaultToCart(selectedPizza: any) {
+    let self = this;
+    self.createDefaultSelectedPizza(selectedPizza);
+    self.appService.emitOrder(self.pizzaBeingCustomized);
+    self.clearSelectedPizza()
+  }
+
+  public createDefaultSelectedPizza(selectedDefaulPizza: any) {
+    let self = this;
+    self.pizzaBeingCustomized.basePizza = selectedDefaulPizza;
+    self.pizzaBeingCustomized.price = selectedDefaulPizza.basePrice;
+    self.pizzaBeingCustomized.size = "Small";
+    self.pizzaBeingCustomized.toppings = [];
+    self.pizzaBeingCustomized.sauce = "";
+    self.pizzaBeingCustomized.crust = "Hand Tossed";
+    self.pizzaBeingCustomized.extraCheese = self.extraCheese;
+  }
+  public clearSelectedPizza() {
+    let self = this;
     self.pizzaBeingCustomized = {};
     self.extraCheese = false;
     self.sizePrice = 0;
     self.crustPrice = 0;
-    self.modalService.hide();
   }
 }

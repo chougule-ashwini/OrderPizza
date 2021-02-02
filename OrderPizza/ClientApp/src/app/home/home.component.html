@@ -7,7 +7,7 @@
         <p class="card-text pizza-ingredients">Delightful combination of <span *ngFor="let ingredient of pizza.ingredients;last as isLast">{{ingredient}}<span *ngIf="!isLast">, </span></span>.</p>
         <p *ngIf="!isPizzaCustomized"><strong>Price:</strong> &#x20B9; {{pizza.basePrice}}, <span class="pull-right"><strong>Size:</strong> Small</span></p>
         <button class="btn btn-primary btn-sm mr-2" (click)="openModal(customizePizzaModal,pizza)">Customise</button>
-        <button class="btn btn-success btn-sm" (click)="AddToOrder(pizza)">Add To Cart</button>
+        <button class="btn btn-success btn-sm" (click)="AddDefaultToCart(pizza)">Add To Cart</button>
       </div>
     </div>
   </div>
@@ -76,20 +76,3 @@
     <button type="button" class="btn btn-success btn-sm" (click)="AddToCart()">Add To Cart</button>
   </div>
 </ng-template>
-
-<div class="col-3">
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Your Order</h5>
-      <div class="order" *ngFor="let pizza of orderBeingCustomized.pizzas">
-        <hr />
-        <h6>{{pizza.basePizza.name}}</h6>
-        <p>{{pizza.size}}, {{pizza.sauce}} {{pizza.crust}} Pizza <span *ngIf="pizza.extraCheese">with Extra Cheese</span></p>
-        <p *ngIf="pizza.toppings.length">Extra Toppings: <span *ngFor="let topping of pizza.toppings;last as isLast">{{topping}}<span *ngIf="!isLast">, </span></span></p>
-        <p>Price: <span class="text-success">&#x20B9; {{pizza.price}} </span></p>
-      </div>
-      <hr />
-      <h5>Total Bill: &#x20B9; {{orderBeingCustomized.bill}}</h5>
-    </div>
-  </div>
-</div>
