@@ -16,8 +16,9 @@ export class HomeComponent implements OnInit {
   public crusts: any;
   public sauces: any;
   public toppings: any;
-  public pizzaBeingCustomized: any;
+  public pizzaBeingCustomized: any = {};
   public priceBeingUpdated: number = 0;
+  public orderBeingCustomized: any;
   public sizePrice: number = 0;
   public crustPrice: number = 0;
   public saucePrice: number = 0;
@@ -96,42 +97,47 @@ export class HomeComponent implements OnInit {
         }
       );
   }
+  public calculatePrice() {
+    let self = this;
+    self.priceBeingUpdated = self.pizzaBeingCustomized.basePizza.basePrice + (self.sizePrice ? self.sizePrice : 0) + (self.crustPrice ? self.crustPrice : 0)
+    self.pizzaBeingCustomized.price = self.priceBeingUpdated;
+  }
 
-  public changeSize(size: string, pizzaBeingCustomized: any) {
+  public changeSize(size: string) {
     let self = this;
     self.pizzaBeingCustomized.size = size;
-    //self.pizzaBeingCustomized.pizzas=pizzaBeingCustomized;
     if (size == "Small") {
-      self.priceBeingUpdated = self.priceBeingUpdated + 0;
+      self.sizePrice = 0;
     }
     if (size == "Medium") {
-      self.sizePrice = self.pizzaBeingCustomized.basePrice + 50;
+      self.sizePrice = 50;
     }
     if (size == "Large") {
-      self.sizePrice = self.pizzaBeingCustomized.basePrice + 100;
+      self.sizePrice = 100;
     }
-    self.pizzaBeingCustomized.price = self.sizePrice;
+    self.calculatePrice();
   }
 
-  public changeCrust(crust: string, pizzaBeingCustomized: any) {
+  public changeCrust(crust: string) {
     let self = this;
     self.pizzaBeingCustomized.crust = crust;
-    //self.pizzaBeingCustomized.pizzas.push(pizzaBeingCustomized);
     if (crust == "Hand Tossed") {
-      self.crustPrice = self.pizzaBeingCustomized.basePrice + 0;
+      self.crustPrice = 0;
     }
     if (crust == "Thin Crust") {
-      self.crustPrice = self.pizzaBeingCustomized.basePrice + 65;
+      self.crustPrice = 65;
     }
     if (crust == "Cheese Bust") {
-      self.crustPrice = self.pizzaBeingCustomized.basePrice + 100;
+      self.crustPrice = 100;
     }
-    self.pizzaBeingCustomized.price = self.crustPrice;
+    self.calculatePrice();
   }
 
-  //OPen customize pizza modal
-  public openModal(template: TemplateRef<any>, pizzaBeingCustomized: any) {
-    this.pizzaBeingCustomized = pizzaBeingCustomized;
-    this.modalRef = this.modalService.show(template);
+  //Open customize pizza modal
+  public openModal(template: TemplateRef<any>, selectedPizza: any) {
+    let self = this;
+    self.pizzaBeingCustomized.basePizza = selectedPizza;
+    self.pizzaBeingCustomized.price = selectedPizza.basePrice;
+    self.modalRef = this.modalService.show(template);
   }
 }

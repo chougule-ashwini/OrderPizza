@@ -23,7 +23,7 @@ namespace PizzaAPI.Models
     {
         public BasePizza basePizza { get; set; }
         public List<string> toppings { get; set; }
-        public List<string> sauce { get; set; }
+        public string sauce { get; set; }
         public string size { get; set; }
         public string crust { get; set; }
         public bool extraCheese { get; set; }

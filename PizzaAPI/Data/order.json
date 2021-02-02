@@ -20,10 +20,7 @@
                         "Onion",
                         "Red Pepper"
                     ],
-                    "sauce": [
-                        "Mozzerilla",
-                        "Honey Musturd"
-                    ],
+                    "sauce": "Mozzerilla",
                     "size": "small",
                     "crust": "Hand Tossed",
                     "extraCheese": true,
@@ -47,10 +44,7 @@
                         "Onion",
                         "Red Pepper"
                     ],
-                    "sauce": [
-                        "Mozzerilla",
-                        "Honey Musturd"
-                    ],
+                    "sauce": "Honey Musturd",
                     "size": "medium",
                     "crust": "Cheese Bust",
                     "quantity": 1,
