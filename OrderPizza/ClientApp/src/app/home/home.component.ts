@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
   public sizePrice: number = 0;
   public crustPrice: number = 0;
   public extraCheese: boolean = false;
+  public extraCheesePrice: number = 60;
+  public perToppingPrice: number = 20;
+  public saucePrice: number = 30;
 
   ngOnInit() {
     this.getPizzas();
@@ -99,8 +102,8 @@ export class HomeComponent implements OnInit {
     let self = this;
     self.pizzaBeingCustomized.price = self.pizzaBeingCustomized.basePizza.basePrice +
       (self.sizePrice ? self.sizePrice : 0) + (self.crustPrice ? self.crustPrice : 0) +
-      (self.extraCheese ? 60 : 0) + (self.pizzaBeingCustomized.toppings.length ? self.pizzaBeingCustomized.toppings.length * 20 : 0) +
-      (self.pizzaBeingCustomized.sauce == "" ? 0 : 30);
+      (self.extraCheese ? self.extraCheesePrice : 0) + (self.pizzaBeingCustomized.toppings.length ? self.pizzaBeingCustomized.toppings.length * self.perToppingPrice : 0) +
+      (self.pizzaBeingCustomized.sauce == "" ? 0 : self.saucePrice);
   }
 
   public changeSize(size: string) {
@@ -121,14 +124,14 @@ export class HomeComponent implements OnInit {
   public changeSauce(sauce: string) {
     let self = this;
     if (self.pizzaBeingCustomized.sauce && self.pizzaBeingCustomized.sauce == sauce) {
-      self.pizzaBeingCustomized.price -= 30;
+      self.pizzaBeingCustomized.price -= self.saucePrice;
       self.pizzaBeingCustomized.sauce = "";
     }
     else if (self.pizzaBeingCustomized.sauce && self.pizzaBeingCustomized.sauce != sauce)
       self.pizzaBeingCustomized.sauce = sauce;
     else {
       self.pizzaBeingCustomized.sauce = sauce;
-      self.pizzaBeingCustomized.price += 30;
+      self.pizzaBeingCustomized.price += self.saucePrice;
     }
   }
 
@@ -151,10 +154,10 @@ export class HomeComponent implements OnInit {
     let self = this;
     if (self.pizzaBeingCustomized.toppings.length && self.pizzaBeingCustomized.toppings.indexOf(selectedTopping) != -1) {
       self.pizzaBeingCustomized.toppings.splice(self.pizzaBeingCustomized.toppings.indexOf(selectedTopping), 1);
-      self.pizzaBeingCustomized.price -= 20;
+      self.pizzaBeingCustomized.price -= self.perToppingPrice;
     } else {
       self.pizzaBeingCustomized.toppings.push(selectedTopping);
-      self.pizzaBeingCustomized.price += 20;
+      self.pizzaBeingCustomized.price += self.perToppingPrice;
     }
   }
 
@@ -163,10 +166,10 @@ export class HomeComponent implements OnInit {
     let self = this;
     if (self.extraCheese) {
       self.pizzaBeingCustomized.extraCheese = false;
-      self.pizzaBeingCustomized.price -= 60;
+      self.pizzaBeingCustomized.price -= self.extraCheesePrice;
     } else {
       self.pizzaBeingCustomized.extraCheese = true;
-      self.pizzaBeingCustomized.price += 60;
+      self.pizzaBeingCustomized.price += self.extraCheesePrice;
     }
   }
 
