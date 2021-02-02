@@ -72,6 +72,7 @@ code {
 
   #pizzaSize li > div, #pizzaSauce li > div, #pizzaCrust li > div {
     border: 1px solid #ddd;
+    cursor:pointer;
   }
 
   #pizzaSize li img {
@@ -82,6 +83,6 @@ code {
     padding: 10px 0px;
   }
 
-.selected {
-  border-color: #d4767b;
-}
+  #pizzaSize li > div.selected, #pizzaSauce li > div.selected, #pizzaCrust li > div.selected {
+    border-color: #d4767b;
+  }
