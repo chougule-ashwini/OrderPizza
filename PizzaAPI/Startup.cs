@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors;
 
 namespace PizzaAPI
 {
@@ -26,6 +27,15 @@ namespace PizzaAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
+            //services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(builder =>
+            //    {
+            //        builder.WithOrigins("https://localhost:44355");
+            //        builder.WithOrigins("https://localhost:44356");
+            //    });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +49,9 @@ namespace PizzaAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(options =>
+                 options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+                 );
 
             app.UseAuthorization();
 

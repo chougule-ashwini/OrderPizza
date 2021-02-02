@@ -58,7 +58,7 @@ namespace PizzaAPI.Controllers
         [Route("Sauce")]
         public List<string> GetSauce()
         {
-            var items = new List<String> { "Musturd", "Mozzerilla", "Tomato" };
+            var items = new List<String> { "Musturd", "Mozzerilla", "Marinara" };
             return items;
         }
 

@@ -1,1 +1,65 @@
-{"order":[{"pizzas":[{"basePizza":{"id":1,"name":"Farmhouse","ingredients":["Tomato","Cheese","Onion","Red Pepper"],"basePrice":400},"toppings":["Tomato","Cheese","Onion","Red Pepper"],"sauce":["Mozzerilla","Honey Musturd"],"size":"small","crust":"Hand Tossed","quantity":2,"price":500},{"basePizza":{"id":1,"name":"Farmhouse","ingredients":["Tomato","Cheese","Onion","Red Pepper"],"basePrice":400},"toppings":["Tomato","Onion","Red Pepper"],"sauce":["Mozzerilla","Honey Musturd"],"size":"medium","crust":"Cheese Bust","quantity":1,"price":400}],"orderId":1,"bill":2000},{"pizzas":null,"orderId":0,"bill":0},{"pizzas":[{"basePizza":{"id":1,"name":"Farmhouse","ingredients":["Tomato","Cheese","Onion","Red Pepper"],"basePrice":400},"toppings":["Tomato","Cheese","Onion","Red Pepper"],"sauce":["Mozzerilla","Honey Musturd"],"size":"small","crust":"Hand Tossed","quantity":2,"price":500},{"basePizza":{"id":1,"name":"Farmhouse","ingredients":["Tomato","Cheese","Onion","Red Pepper"],"basePrice":400},"toppings":["Tomato","Onion","Red Pepper"],"sauce":["Mozzerilla","Honey Musturd"],"size":"medium","crust":"Cheese Bust","quantity":1,"price":400}],"orderId":1,"bill":2000},{"pizzas":[{"basePizza":{"id":1,"name":"Farmhouse","ingredients":["Tomato","Cheese","Onion","Red Pepper"],"basePrice":400},"toppings":["Tomato","Cheese","Onion","Red Pepper"],"sauce":["Mozzerilla","Honey Musturd"],"size":"small","crust":"Hand Tossed","quantity":2,"price":500},{"basePizza":{"id":1,"name":"Farmhouse","ingredients":["Tomato","Cheese","Onion","Red Pepper"],"basePrice":400},"toppings":["Tomato","Onion","Red Pepper"],"sauce":["Mozzerilla","Honey Musturd"],"size":"medium","crust":"Cheese Bust","quantity":1,"price":400}],"orderId":4,"bill":2000}]}
+{
+    "order": [
+        {
+            "pizzas": [
+                {
+                    "basePizza": {
+                        "id": 1,
+                        "name": "Farmhouse",
+                        "ingredients": [
+                            "Tomato",
+                            "Cheese",
+                            "Onion",
+                            "Red Pepper"
+                        ],
+                        "basePrice": 400
+                    },
+                    "toppings": [
+                        "Tomato",
+                        "Cheese",
+                        "Onion",
+                        "Red Pepper"
+                    ],
+                    "sauce": [
+                        "Mozzerilla",
+                        "Honey Musturd"
+                    ],
+                    "size": "small",
+                    "crust": "Hand Tossed",
+                    "extraCheese": true,
+                    "quantity": 2,
+                    "price": 500
+                },
+                {
+                    "basePizza": {
+                        "id": 1,
+                        "name": "Farmhouse",
+                        "ingredients": [
+                            "Tomato",
+                            "Cheese",
+                            "Onion",
+                            "Red Pepper"
+                        ],
+                        "basePrice": 400
+                    },
+                    "toppings": [
+                        "Tomato",
+                        "Onion",
+                        "Red Pepper"
+                    ],
+                    "sauce": [
+                        "Mozzerilla",
+                        "Honey Musturd"
+                    ],
+                    "size": "medium",
+                    "crust": "Cheese Bust",
+                    "quantity": 1,
+                    "extraCheese": false,
+                    "price": 400
+                }
+            ],
+            "orderId": 1,
+            "bill": 2000
+        }
+    ]
+}

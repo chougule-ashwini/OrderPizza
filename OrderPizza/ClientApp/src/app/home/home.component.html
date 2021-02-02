@@ -1,19 +1,17 @@
-
 <div class="row">
-  <div class="col-4" *ngFor="let pizza of pizzas">
-    <div class="card" style="width: 100%;">
-      <img class="card-img-top" :src="..\assets\images\{{pizza.image}}" :alt="{{ pizza.name }}">
+  <div class="col-4" *ngFor="let pizza of basePizza">
+    <div class="card pizza-card" style="width: 100%;">
+      <img class="card-img-top" :src="..\assets\images\farm-house.png" :alt="{{ pizza.name }}">
       <div class="card-body">
-        <h5 class="card-title">{{ pizza.name }}</h5>
-        <p class="card-text">Delightful combination of <strong *ngFor="let ingredient of pizza.ingredients">{{ingredient}}<span *ngIf="!isLast">, </span></strong>.</p>
-        <p *ngIf="!isPizzaCustomized"><strong>Price:</strong> {{pizza.size[0].small[0].price}}, <span class="pull-right"><strong>Size:</strong> Small</span></p>
+        <h5 class="card-title text-success mb-1">{{ pizza.name }}</h5>
+        <p class="card-text pizza-ingredients">Delightful combination of <span *ngFor="let ingredient of pizza.ingredients;last as isLast">{{ingredient}}<span *ngIf="!isLast">, </span></span>.</p>
+        <p *ngIf="!isPizzaCustomized"><strong>Price:</strong> {{pizza.basePrice}}, <span class="pull-right"><strong>Size:</strong> Small</span></p>
         <button class="btn btn-primary btn-sm mr-2" (click)="openModal(customizePizzaModal,pizza)">Customise</button>
-        <button class="btn btn-primary btn-sm" (click)="AddToOrder(pizza)">Add To Cart</button>
+        <button class="btn btn-success btn-sm" (click)="AddToOrder(pizza)">Add To Cart</button>
       </div>
     </div>
   </div>
 </div>
-
 <ng-template #customizePizzaModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Customize Pizza</h4>
@@ -22,32 +20,45 @@
     </button>
   </div>
   <div class="modal-body">
-    <h3>{{ orderedPizza.name }} - Total</h3>
     <div class="row">
-      <div class="col-5">
-        <img class="pizza-img" :src="..\assets\images\{{orderedPizza.image}}" :alt="{{ orderedPizza.name }}">
+      <div class="col-5 pizza-img" style="background-image: url('../assets/images/farm-house.png');">
+        
       </div>
       <div class="col-7">
-        <h5>Select Size</h5>{{orderedPizza.size[0]}}
-        <ul id="pizzaSize">
-          <li *ngFor="let size in orderedPizza.size[0]">
-            {{size}}
-          </li>
-        </ul>
+        <h4>{{ pizzaBeingCustomized.name }} <small>Total : 8879</small></h4>
+        A pizza loaded with a combination of <span *ngFor="let ingredient of pizzaBeingCustomized.ingredients;last as isLast">{{ingredient}}<span *ngIf="!isLast">, </span></span>.
       </div>
     </div>
-
-    <h5>Add Toppings - Rs. 20 each</h5>
-    <ul id="toppings">
-      <li *ngFor="let topping of toppings">
-        <img class="toppings-img" :src="..\assets\images\{{topping.image}}" :alt="{{ topping.name }}">
+    <hr />
+    <h6>Select Size</h6>
+    <ul id="pizzaSize" class="row">
+      <li class="col-4 text-center" *ngFor="let size of sizes">
+        <div>
+          <img src="..\assets\images\large.jpg" :alt="{{size}}" />
+          {{size}}
+        </div>
+      </li>
+    </ul>
+    <h6>Add Toppings - Rs. 20 each</h6>
+    <ul id="toppings" class="row">
+      <li class="col-6" *ngFor="let topping of toppings">
+        <img class="toppings-img" :src="..\assets\images\mashroom.jpg" :alt="{{ topping }}">
         <label>
-          <input type="checkbox" name="topping" :value="topping.name" [(ngModal)]="topping.checked" />
-          {{ topping.name }}
+          <input type="checkbox" name="topping" :value="topping" />
+          {{ topping }}
         </label>
       </li>
     </ul>
-    <h5><input type="checkbox" name="extraCheese" :value="orderedPizza.extraCheese" [(ngModal)]="orderedPizza.extraCheese" /> Add Extra Cheese - Rs. 60</h5>
+    <h6>Select Sauces - Rs. 30 each</h6>
+    <ul id="pizzaSize" class="row">
+      <li class="col-4 text-center" *ngFor="let sauce of sauces">
+        <div>
+          <img src="..\assets\images\large.jpg" :alt="{{size}}" />
+          {{sauce}}
+        </div>
+      </li>
+    </ul>
+    <h6><input type="checkbox" name="extraCheese" :value="extraCheese" [(ngModel)]="extraCheese" /> Add Extra Cheese - Rs. 60</h6>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="closeModal()">Ok</button>

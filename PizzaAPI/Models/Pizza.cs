@@ -26,6 +26,7 @@ namespace PizzaAPI.Models
         public List<string> sauce { get; set; }
         public string size { get; set; }
         public string crust { get; set; }
+        public bool extraCheese { get; set; }
         public int quantity { get; set; }
         public int price { get; set; }
     }
@@ -41,13 +42,4 @@ namespace PizzaAPI.Models
     {
         public List<Order> order { get; set; }
     }
-
-
-
-
-
-
-
-
-
 }

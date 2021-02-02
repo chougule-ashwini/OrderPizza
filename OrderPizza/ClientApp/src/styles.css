@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+body {
+  font-size: 0.8rem;
+}
 a {
   color: #0366d6;
 }
@@ -14,14 +17,61 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
-.pizza-img{
-    width:150px;
+
+.pizza-img {
+  height: 100px;
+  background-position: top;
+  background-size: cover;
 }
-.toppings-img{
-    width:35px;
-    margin-right:10px;
+
+.toppings-img {
+  width: 35px;
+  margin-right: 10px;
 }
-#toppings{
-    list-style:none;
-    padding:0px;
+
+#toppings {
+  list-style: none;
+  padding: 0px;
 }
+
+
+/* card styling */
+.pizza-card.card {
+  min-height: 350px;
+  margin-bottom: 5px;
+}
+
+.pizza-card .card-img-top {
+  max-width: 170px;
+  margin: auto;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.pizza-card .card-body {
+  padding: 1rem;
+}
+
+.pizza-card .pizza-ingredients {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 58px;
+}
+
+.card.pizza-card p {
+  margin-bottom: 0.5rem;
+}
+
+
+#pizzaSize {
+  list-style: none;
+  padding: 0;
+}
+  #pizzaSize li > div {
+    border: 1px solid #ddd;
+  }
+  #pizzaSize li img {
+    width: 50px;
+  }
