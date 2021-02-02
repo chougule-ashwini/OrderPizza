@@ -17,12 +17,9 @@ export class HomeComponent implements OnInit {
   public sauces: any;
   public toppings: any;
   public pizzaBeingCustomized: any = {};
-  public priceBeingUpdated: number = 0;
-  public orderBeingCustomized: any;
+  public orderBeingCustomized: any = {};
   public sizePrice: number = 0;
   public crustPrice: number = 0;
-  public saucePrice: number = 0;
-  public toppingsPrice: number = 0;
   public extraCheese: boolean = false;
 
   ngOnInit() {
@@ -31,6 +28,8 @@ export class HomeComponent implements OnInit {
     this.getPizzaCrusts();
     this.getPizzaSauces();
     this.getPizzaToppings();
+    this.orderBeingCustomized.pizzas = [];
+    this.orderBeingCustomized.bill = 0;
   }
 
   //Get all base pizzas
@@ -97,10 +96,13 @@ export class HomeComponent implements OnInit {
         }
       );
   }
+
   public calculatePrice() {
     let self = this;
-    self.priceBeingUpdated = self.pizzaBeingCustomized.basePizza.basePrice + (self.sizePrice ? self.sizePrice : 0) + (self.crustPrice ? self.crustPrice : 0)
-    self.pizzaBeingCustomized.price = self.priceBeingUpdated;
+    self.pizzaBeingCustomized.price = self.pizzaBeingCustomized.basePizza.basePrice +
+      (self.sizePrice ? self.sizePrice : 0) + (self.crustPrice ? self.crustPrice : 0) +
+      (self.extraCheese ? 60 : 0) + (self.pizzaBeingCustomized.toppings.length ? self.pizzaBeingCustomized.toppings.length * 20 : 0) +
+      (self.pizzaBeingCustomized.sauce == "" ? 0 : 30);
   }
 
   public changeSize(size: string) {
@@ -118,19 +120,54 @@ export class HomeComponent implements OnInit {
     self.calculatePrice();
   }
 
-  public changeCrust(crust: string) {
+  public changeSauce(sauce: string) {
     let self = this;
-    self.pizzaBeingCustomized.crust = crust;
-    if (crust == "Hand Tossed") {
+    if (self.pizzaBeingCustomized.sauce && self.pizzaBeingCustomized.sauce == sauce) {
+      self.pizzaBeingCustomized.price -= 30;
+      self.pizzaBeingCustomized.sauce = "";
+    }
+    else if (self.pizzaBeingCustomized.sauce && self.pizzaBeingCustomized.sauce != sauce)
+      self.pizzaBeingCustomized.sauce = sauce;
+    else {
+      self.pizzaBeingCustomized.sauce = sauce;
+      self.pizzaBeingCustomized.price += 30;
+    }
+  }
+
+  public changeCrust(selectedCrust: string) {
+    let self = this;
+    self.pizzaBeingCustomized.crust = selectedCrust;
+    if (selectedCrust == "Hand Tossed") {
       self.crustPrice = 0;
     }
-    if (crust == "Thin Crust") {
+    if (selectedCrust == "Thin Crust") {
       self.crustPrice = 65;
     }
-    if (crust == "Cheese Bust") {
+    if (selectedCrust == "Cheese Bust") {
       self.crustPrice = 100;
     }
     self.calculatePrice();
+  }
+
+  public chooseToppings(selectedTopping: string) {
+    let self = this;
+    if (self.pizzaBeingCustomized.toppings.length && self.pizzaBeingCustomized.toppings.indexOf(selectedTopping) != -1) {
+      self.pizzaBeingCustomized.toppings.splice(self.pizzaBeingCustomized.toppings.indexOf(selectedTopping), 1);
+      self.pizzaBeingCustomized.price -= 20;
+    } else {
+      self.pizzaBeingCustomized.toppings.push(selectedTopping);
+      self.pizzaBeingCustomized.price += 20;
+    }
+  }
+
+  //Select extra cheese
+  public addCheese() {
+    let self = this;
+    if (self.extraCheese) {
+      self.pizzaBeingCustomized.price -= 60;
+    } else {
+      self.pizzaBeingCustomized.price += 60;
+    }
   }
 
   //Open customize pizza modal
@@ -138,6 +175,22 @@ export class HomeComponent implements OnInit {
     let self = this;
     self.pizzaBeingCustomized.basePizza = selectedPizza;
     self.pizzaBeingCustomized.price = selectedPizza.basePrice;
+    self.pizzaBeingCustomized.size = "Small";
+    self.pizzaBeingCustomized.toppings = [];
+    self.pizzaBeingCustomized.sauce = "";
+    self.pizzaBeingCustomized.crust = "Hand Tossed";
     self.modalRef = this.modalService.show(template);
+  }
+
+  public AddToCart() {
+    let self = this;
+    self.orderBeingCustomized.bill = 0;
+    self.orderBeingCustomized.pizzas.push(self.pizzaBeingCustomized);
+    self.orderBeingCustomized.pizzas.forEach(element => self.orderBeingCustomized.bill = self.orderBeingCustomized.bill + element.price);
+    self.pizzaBeingCustomized = {};
+    self.extraCheese = false;
+    self.sizePrice = 0;
+    self.crustPrice = 0;
+    self.modalService.hide();
   }
 }

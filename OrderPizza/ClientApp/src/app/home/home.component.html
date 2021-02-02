@@ -14,7 +14,7 @@
 </div>
 <ng-template #customizePizzaModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Customize Pizza</h4>
+    <h4 class="modal-title" id="modal-basic-title">Customize Your Pizza</h4>
     <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">×</span>
     </button>
@@ -22,59 +22,57 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-5 pizza-img" style="background-image: url('../assets/images/farm-house.png');">
-        
+
       </div>
       <div class="col-7">
-        <h4>{{ pizzaBeingCustomized.basePizza.name }} <br /><small>Total : &#x20B9; {{pizzaBeingCustomized.price}}</small></h4>
+        <h4>{{ pizzaBeingCustomized.basePizza.name }} <br /><small>Price : &#x20B9; {{pizzaBeingCustomized.price}}</small></h4>
         A pizza loaded with <span *ngFor="let ingredient of pizzaBeingCustomized.basePizza.ingredients;last as isLast">{{ingredient}}<span *ngIf="!isLast">, </span></span>.
       </div>
     </div>
     <hr />
+
     <h6>Select Size</h6>
     <ul id="pizzaSize" class="row">
       <li class="col-4 text-center" *ngFor="let size of sizes">
-        <div (click)="changeSize(size)">
+        <div (click)="changeSize(size)" [ngClass]="{'selected': pizzaBeingCustomized.size == size}">
           <img src="..\assets\images\{{size}}.jpg" :alt="{{size}}" />
           {{size}}
         </div>
       </li>
     </ul>
+
+    <h6>Select Crust</h6>
+    <ul id="pizzaCrust" class="row">
+      <li class="col-4 text-center" *ngFor="let crust of crusts">
+        <div (click)="changeCrust(crust)" [ngClass]="{'selected': pizzaBeingCustomized.crust == crust}">
+          {{crust}}
+        </div>
+      </li>
+    </ul>
+
     <h6>Add Toppings - Rs. 20 each</h6>
     <ul id="toppings" class="row">
       <li class="col-6" *ngFor="let topping of toppings">
         <!--<img class="toppings-img" :src="..\assets\images\mashroom.jpg" :alt="{{ topping }}">-->
         <label>
-          <input type="checkbox" name="topping" :value="topping" />
+          <input type="checkbox" name="toppings" (click)="chooseToppings(topping)" :value="topping" />
           {{ topping }}
         </label>
       </li>
     </ul>
+
     <h6>Select Sauces - Rs. 30 each</h6>
     <ul id="pizzaSauce" class="row">
       <li class="col-4 text-center" *ngFor="let sauce of sauces">
-        <div>
-          <img src="..\assets\images\pizza-sauce.jpg" :alt="{{sauce}}" />
+        <div (click)="changeSauce(sauce)" [ngClass]="{'selected': pizzaBeingCustomized.sauce == sauce}">
           {{sauce}}
         </div>
       </li>
     </ul>
-    <h6><input type="checkbox" name="extraCheese" :value="extraCheese" [(ngModel)]="extraCheese" /> Add Extra Cheese - Rs. 60</h6>
+
+    <h6><input type="checkbox" name="extraCheese" (click)="addCheese()" :value="extraCheese" [(ngModel)]="extraCheese" /> Add Extra Cheese - Rs. 60</h6>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success btn-sm" (click)="AddToCart()">Add To Cart</button>
   </div>
 </ng-template>
-
-<!--<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
-  -->

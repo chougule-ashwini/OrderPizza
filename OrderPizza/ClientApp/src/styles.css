@@ -4,6 +4,7 @@
 body {
   font-size: 0.8rem;
 }
+
 a {
   color: #0366d6;
 }
@@ -65,13 +66,23 @@ code {
 }
 
 
-#pizzaSize, #pizzaSauce {
+#pizzaSize, #pizzaSauce, #pizzaCrust {
   list-style: none;
   padding: 0;
 }
-  #pizzaSize li > div, #pizzaSauce li > div {
+
+  #pizzaSize li > div, #pizzaSauce li > div, #pizzaCrust li > div {
     border: 1px solid #ddd;
   }
-  #pizzaSize li img, #pizzaSauce li img {
+
+  #pizzaSize li img {
     width: 50px;
   }
+
+  #pizzaCrust > li > div, #pizzaSauce > li > div {
+    padding: 10px 0px;
+  }
+
+.selected {
+  border-color: #d4767b;
+}
