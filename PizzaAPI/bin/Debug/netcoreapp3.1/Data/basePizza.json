@@ -1,0 +1,34 @@
+{
+    "basePizzas": [
+        {
+            "id": 1,
+            "name": "Farmhouse",
+            "ingredients": [ "Tomato", "Cheese", "Onion", "Red Pepper" ],
+            "basePrice": 345
+        },
+        {
+            "id": 2,
+            "name": "Margherita",
+            "ingredients": [ "Cheese" ],
+            "basePrice": 100
+        },
+        {
+            "id": 3,
+            "name": "Peppy Paneer",
+            "ingredients": [ "Cheese", "Red Papper", "Paneer", "Green Papper" ],
+            "basePrice": 350
+        },
+        {
+            "id": 4,
+            "name": "Extravaganza",
+            "ingredients": [ "Black olives", "Cheese", "Onion", "Capsicum", "Mushroom", "Corn", "Tomato", "Jalapeno" ],
+            "basePrice": 245
+        },
+        {
+            "id": 5,
+            "name": "Cheese n Corn",
+            "ingredients": [ "Cheese", "Corn" ],
+            "basePrice": 150
+        }
+    ]
+}

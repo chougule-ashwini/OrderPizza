@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "SOAeu/gSVhZn12hH+8dTPuoBBGXRlgP3Z2KNNWJG9wx7HmwEGB+7ILqVeoEW3i8/fVlPFWMM5UYk0qBDI62Xyg==",
+  "success": true,
+  "projectFilePath": "C:\\Personal\\PizzaOrderApp\\OrderPizza\\PizzaAPI\\PizzaAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AshwiniChougule\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
