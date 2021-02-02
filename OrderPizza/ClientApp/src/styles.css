@@ -9,6 +9,10 @@ a {
   color: #0366d6;
 }
 
+p {
+  margin-bottom: 0.5rem;
+}
+
 code {
   color: #e01a76;
 }
@@ -60,11 +64,6 @@ code {
   overflow: hidden;
   height: 58px;
 }
-
-.card.pizza-card p {
-  margin-bottom: 0.5rem;
-}
-
 
 #pizzaSize, #pizzaSauce, #pizzaCrust {
   list-style: none;

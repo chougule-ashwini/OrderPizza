@@ -164,8 +164,10 @@ export class HomeComponent implements OnInit {
   public addCheese() {
     let self = this;
     if (self.extraCheese) {
+      self.pizzaBeingCustomized.extraCheese = false;
       self.pizzaBeingCustomized.price -= 60;
     } else {
+      self.pizzaBeingCustomized.extraCheese = true;
       self.pizzaBeingCustomized.price += 60;
     }
   }
@@ -179,6 +181,7 @@ export class HomeComponent implements OnInit {
     self.pizzaBeingCustomized.toppings = [];
     self.pizzaBeingCustomized.sauce = "";
     self.pizzaBeingCustomized.crust = "Hand Tossed";
+    self.pizzaBeingCustomized.extraCheese = self.extraCheese;
     self.modalRef = this.modalService.show(template);
   }
 
