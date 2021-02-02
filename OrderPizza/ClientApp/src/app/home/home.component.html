@@ -1,0 +1,69 @@
+
+<div class="row">
+  <div class="col-4" *ngFor="let pizza of pizzas">
+    <div class="card" style="width: 100%;">
+      <img class="card-img-top" :src="..\assets\images\{{pizza.image}}" :alt="{{ pizza.name }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ pizza.name }}</h5>
+        <p class="card-text">Delightful combination of <strong *ngFor="let ingredient of pizza.ingredients">{{ingredient}}<span *ngIf="!isLast">, </span></strong>.</p>
+        <p *ngIf="!isPizzaCustomized"><strong>Price:</strong> {{pizza.size[0].small[0].price}}, <span class="pull-right"><strong>Size:</strong> Small</span></p>
+        <button class="btn btn-primary btn-sm mr-2" (click)="openModal(customizePizzaModal,pizza)">Customise</button>
+        <button class="btn btn-primary btn-sm" (click)="AddToOrder(pizza)">Add To Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #customizePizzaModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Customize Pizza</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h3>{{ orderedPizza.name }} - Total</h3>
+    <div class="row">
+      <div class="col-5">
+        <img class="pizza-img" :src="..\assets\images\{{orderedPizza.image}}" :alt="{{ orderedPizza.name }}">
+      </div>
+      <div class="col-7">
+        <h5>Select Size</h5>{{orderedPizza.size[0]}}
+        <ul id="pizzaSize">
+          <li *ngFor="let size in orderedPizza.size[0]">
+            {{size}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <h5>Add Toppings - Rs. 20 each</h5>
+    <ul id="toppings">
+      <li *ngFor="let topping of toppings">
+        <img class="toppings-img" :src="..\assets\images\{{topping.image}}" :alt="{{ topping.name }}">
+        <label>
+          <input type="checkbox" name="topping" :value="topping.name" [(ngModal)]="topping.checked" />
+          {{ topping.name }}
+        </label>
+      </li>
+    </ul>
+    <h5><input type="checkbox" name="extraCheese" :value="orderedPizza.extraCheese" [(ngModal)]="orderedPizza.extraCheese" /> Add Extra Cheese - Rs. 60</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal()">Ok</button>
+  </div>
+</ng-template>
+
+<!--<ul>
+  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
+  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
+  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
+</ul>
+<p>To help you get started, we've also set up:</p>
+<ul>
+  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
+  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
+  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
+</ul>
+<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+  -->
