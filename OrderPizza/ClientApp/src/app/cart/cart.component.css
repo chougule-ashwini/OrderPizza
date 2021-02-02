@@ -1,0 +1,6 @@
+.remove-order-item {
+  position: absolute;
+  right: 15px;
+  font-weight: 900;
+  cursor: pointer;
+}

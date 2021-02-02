@@ -36,8 +36,8 @@ export class HomeComponent implements OnInit {
   //Get all base pizzas
   public getPizzas() {
     let self = this;
-    const urlofApi = 'https://localhost:44355/api/pizza/basePizza';
-    self.http.get(urlofApi)
+    const apiUrl = 'https://localhost:44355/api/pizza/basePizza';
+    self.http.get(apiUrl)
       .subscribe(
         (res: Response) => {
           self.basePizza = res["basePizzas"];
@@ -49,8 +49,8 @@ export class HomeComponent implements OnInit {
   //Get all base pizza sizes
   public getPizzaSizes() {
     let self = this;
-    const urlofApi = 'https://localhost:44355/api/pizza/Sizes';
-    self.http.get(urlofApi)
+    const apiUrl = 'https://localhost:44355/api/pizza/Sizes';
+    self.http.get(apiUrl)
       .subscribe(
         (res: Response) => {
           self.sizes = res;
@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit {
   //Get all base pizza crusts
   public getPizzaCrusts() {
     let self = this;
-    const urlofApi = 'https://localhost:44355/api/pizza/Crust';
-    self.http.get(urlofApi)
+    const apiUrl = 'https://localhost:44355/api/pizza/Crust';
+    self.http.get(apiUrl)
       .subscribe(
         (res: Response) => {
           self.crusts = res;
@@ -75,8 +75,8 @@ export class HomeComponent implements OnInit {
   //Get all base pizza sauces
   public getPizzaSauces() {
     let self = this;
-    const urlofApi = 'https://localhost:44355/api/pizza/Sauce';
-    self.http.get(urlofApi)
+    const apiUrl = 'https://localhost:44355/api/pizza/Sauce';
+    self.http.get(apiUrl)
       .subscribe(
         (res: Response) => {
           self.sauces = res;
@@ -88,8 +88,8 @@ export class HomeComponent implements OnInit {
   //Get all base pizza toppings
   public getPizzaToppings() {
     let self = this;
-    const urlofApi = 'https://localhost:44355/api/pizza/Toppings';
-    self.http.get(urlofApi)
+    const apiUrl = 'https://localhost:44355/api/pizza/Toppings';
+    self.http.get(apiUrl)
       .subscribe(
         (res: Response) => {
           self.toppings = res;
