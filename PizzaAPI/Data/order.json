@@ -47,8 +47,8 @@
                     "sauce": "Honey Musturd",
                     "size": "medium",
                     "crust": "Cheese Bust",
-                    "quantity": 1,
                     "extraCheese": false,
+                    "quantity": 1,
                     "price": 400
                 }
             ],

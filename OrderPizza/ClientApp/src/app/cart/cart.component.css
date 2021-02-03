@@ -1,6 +1,3 @@
-.remove-order-item {
-  position: absolute;
-  right: 15px;
-  font-weight: 900;
+.change-order-item {
   cursor: pointer;
 }

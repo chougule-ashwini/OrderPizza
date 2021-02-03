@@ -202,6 +202,7 @@ export class HomeComponent implements OnInit {
     self.pizzaBeingCustomized.sauce = "";
     self.pizzaBeingCustomized.crust = "Hand Tossed";
     self.pizzaBeingCustomized.extraCheese = self.extraCheese;
+    self.pizzaBeingCustomized.quantity = 1;
   }
   public clearSelectedPizza() {
     let self = this;

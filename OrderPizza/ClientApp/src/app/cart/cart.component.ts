@@ -14,6 +14,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     let self = this;
     self.orderBeingPlaced.bill = 0;
+    self.orderBeingPlaced.orderId = 0;
     self.orderBeingPlaced.pizzas = [];
     self.appService.subscriber$.subscribe(data => {
       self.orderBeingPlaced.bill = 0;
@@ -22,16 +23,22 @@ export class CartComponent implements OnInit {
     });
   }
   removeOrderItem(itemToBeRemoved: any) {
-    this.orderBeingPlaced.pizzas = this.orderBeingPlaced.pizzas.filter(function (value, index, arr) {
+    let self = this;
+    self.orderBeingPlaced.bill = 0;
+    self.orderBeingPlaced.pizzas = self.orderBeingPlaced.pizzas.filter(function (value, index, arr) {
       return JSON.stringify(itemToBeRemoved) !== JSON.stringify(arr[index]);
     });
+    self.orderBeingPlaced.pizzas.forEach(element => self.orderBeingPlaced.bill = self.orderBeingPlaced.bill + element.price);
+  }
+  addOrderItem(itemToBeAdded: any) {
+    this.orderBeingPlaced.pizzas.filter(function (value, index, arr) {
+      return JSON.stringify(itemToBeAdded) === JSON.stringify(arr[index]);
+    })[0].quantity += 1;
   }
   saveOrder() {
     let self = this;
     const apiUrl = 'https://localhost:44355/api/pizza';
-    self.http.post(apiUrl, {
-      "orderItem": self.orderBeingPlaced
-    })
+    self.http.post(apiUrl,self.orderBeingPlaced)
       .subscribe(
         (res: Response) => {          
           console.log("Sauces", res);
