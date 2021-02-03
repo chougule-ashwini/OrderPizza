@@ -38,10 +38,12 @@ export class CartComponent implements OnInit {
   saveOrder() {
     let self = this;
     const apiUrl = 'https://localhost:44355/api/pizza';
-    self.http.post(apiUrl,self.orderBeingPlaced)
+    self.http.post(apiUrl, self.orderBeingPlaced)
       .subscribe(
-        (res: Response) => {          
+        (res: Response) => {
           console.log("Sauces", res);
+          self.orderBeingPlaced.pizzas = [];
+          self.orderBeingPlaced.bill = 0;
         }
       );
   }
